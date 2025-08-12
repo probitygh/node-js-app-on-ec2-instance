@@ -1,14 +1,16 @@
 # Deploying a Node Js Application on AWS EC2
 
-### Testing the project locally
+### Testing the project on local machine.
 
 1. Clone this project
 ```
-git clone https://github.com/verma-kunal/AWS-Session.git
+git clone https://github.com/probitygh/Deploy-node-js-app-on-aws-ec2.git
+
+
 ```
 2. Setup the following environment variables - `(.env)` file
 ```
-DOMAIN= ""
+DOMAIN=http://localhost:3000
 PORT=3000
 STATIC_DIR="./client"
 
@@ -18,26 +20,29 @@ SECRET_KEY=""
 3. Initialise and start the project
 ```
 npm install
-npm run start
+npm start
 ```
+
+Visit: http://localhost:3000
+
+![](img/Project%20working%20on%20localhost.png)
+
 
 ### Set up an AWS EC2 instance
 
 1. Create an IAM user & login to your AWS Console
     - Access Type - Password
-    - Permissions - Admin
+    - Permissions - Admin Access
 2. Create an EC2 instance
     - Select an OS image - Ubuntu
-    - Create a new key pair & download `.pem` file
+    - Create a new key pair & download `.ppk` file
     - Instance type - t2.micro
-3. Connecting to the instance using ssh
-```
-ssh -i instance.pem ubunutu@<IP_ADDRESS>
-```
+3.Connect to the instance using Putty SSH terminal
+
 
 ### Configuring Ubuntu on remote VM
 
-1. Updating the outdated packages and dependencies
+1. Update the outdated packages and dependencies
 ```
 sudo apt update
 ```
@@ -48,11 +53,12 @@ sudo apt update
 
 1. Clone this project in the remote VM
 ```
-git clone https://github.com/verma-kunal/AWS-Session.git
+git clone https://github.com/probitygh/Deploy-node-js-app-on-aws-ec2.git
+
 ```
-2. Setup the following environment variables - `(.env)` file
+2. Setup the following environment variables - `(.env)` file using vim editor `vim  .env` press `i` to enter `insert mode` and `:x or :wq` to exit and save.
 ```
-DOMAIN= ""
+DOMAIN=http://localhost:3000
 PORT=3000
 STATIC_DIR="./client"
 
@@ -67,6 +73,10 @@ npm install
 npm run start
 ```
 
-> NOTE - We will have to edit the **inbound rules** in the security group of our EC2, in order to allow traffic from our particular port
+> NOTE - We will have to edit the **inbound rules** in the security group of our EC2, in order to allow traffic from our particular port.
+
+![](img/In%20bound%20port%203000.png)
 
 ### Project is deployed on AWS 🎉
+
+![](img/Project%20on%20AWS%20server.png)
